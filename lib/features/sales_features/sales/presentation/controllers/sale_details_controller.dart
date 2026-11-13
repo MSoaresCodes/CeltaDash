@@ -1,6 +1,7 @@
 import 'package:celta_dash/core/providers.dart';
 import 'package:celta_dash/features/sales_features/sales/domain/entities/entities.dart';
 import 'package:celta_dash/features/sales_features/sales/providers.dart';
+import 'package:celta_dash/utils/extensions/extensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'sale_details_controller.g.dart';
@@ -13,6 +14,7 @@ class SaleDetailsController extends _$SaleDetailsController {
     String documentNumber,
     DateTime billingDate,
   ) async {
+    ref.cache();
     final date = DateTime(billingDate.year, billingDate.month, billingDate.day);
     final ecParams = await ref.watch(
       activeEcParamsStateControllerProvider.future,
