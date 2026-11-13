@@ -22,7 +22,8 @@ class FinalizationsContent extends StatelessWidget {
             .map(
               (e) => TitleAndSubTitle(
                 title: e.Finalization?.Name ?? '-'.hardcoded,
-                subTitle: (e.Value ?? 0).toString().toBRL(),
+                subTitle:
+                    "${(e.Value ?? 0).toString().toBRL()}${((e.QuantityOfPortions ?? 0) > 1) ? ' (${e.QuantityOfPortions}x)' : ''}",
                 subTitleIsPrice: true,
               ),
             )
