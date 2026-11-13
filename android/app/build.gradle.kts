@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ApplicationExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -9,7 +11,7 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-android {
+extensions.configure<ApplicationExtension> {
     namespace = "br.com.celtaware.dash"
     compileSdk = 37
     ndkVersion = "29.0.13113456"
@@ -19,12 +21,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_11.toString() }
-
     defaultConfig {
         applicationId = "br.com.celtaware.dash"
         multiDexEnabled = true
-        minSdk = flutter.minSdkVersion.toInt()
+        minSdk = flutter.minSdkVersion
         targetSdk = 37
         versionCode = 47
         versionName = flutter.versionName
@@ -51,6 +51,12 @@ android {
             )
             signingConfig = signingConfigs.getByName("release")
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
     }
 }
 
